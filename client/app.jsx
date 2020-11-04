@@ -1,7 +1,3 @@
-// import HomePage from "./compiled/client/components/homePage.js"
-// import {Route, Redirect } from 'react-router-dom';
-// var { Router, Route, IndexRoute, hashHistory, IndexLink, Link, browserHistory } = ReactRouter
-// 
 class App extends React.Component {
     constructor() {
         super()
@@ -19,7 +15,6 @@ class App extends React.Component {
             ExpirationDate: '',
             CVV: '',
             BillingZipcode: ''
-
         }
     }
     ClearFields() {
@@ -57,12 +52,12 @@ class App extends React.Component {
                                     <button onClick={() => {
                                         this.setState({ formCounter: 3 })
                                         this.ClearFields()
-                                    }} type="reset" value="Reset" class="btn btn-info">go to form three</button>
+                                    }}  class="btn btn-info">go to form three</button>
                                 </div>
                                 :
                                 (this.state.formCounter === 3) ?
                                     <div>
-                                        <h2>FORM TWO</h2>
+                                        <h2>FORM THREE</h2>
                                         <div><input type="text" class="form-group" placeholder="Card Number" onChange={(e) => this.setState({ CreditCardNumber: e.target.value })} /></div>
                                         <div><input type="text" class="form-group" placeholder="Expire Date" onChange={(e) => this.setState({ ExpirationDate: e.target.value })} /></div>
                                         <div><input type="text"  class="form-group" placeholder="CVV" onChange={(e) => this.setState({ CVV: e.target.value })} /> </div>
@@ -76,13 +71,11 @@ class App extends React.Component {
                                                     "Content-type": "application/json; charset=UTF-8"
                                                 }
                                             })
-                                                .then(response => response.json())
-                                                .then(json => console.log(json))
-                                        }} type="reset" value="Reset" class="btn btn-info">preview info</button>
+                                        }}  class="btn btn-info">preview info</button>
                                     </div>
                                     :
                                     <div>
-                                        <h2>you information</h2>
+                                        <h2>YOUR INFORMATION</h2>
                                         <h3>Name:{this.state.Name}</h3>
                                         <h3>Email:{this.state.Email}</h3>
                                         <h3>Password:{this.state.Password}</h3>
