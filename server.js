@@ -26,7 +26,7 @@ app.get("/app", (req, res) => {
 
 
 app.post('/', (req, res) => {
-    res.send(req.body)
+    console.log(req.body)
     let data = req.body;
     let fOneObj = {
         name: data.Name,
@@ -41,18 +41,18 @@ app.post('/', (req, res) => {
         zipCode: data.Zipcode,
     }
     let fThreeObj = {
-        card: data.CreditCardNumber,
+        card: data.CreditCardNumber, 
         expDate: data.ExpirationDate,
-        cvv: data.CVV,
+        cvv: data.cvv,
         billingZipCode: data.BillingZipcode
     }
 
-    let fOne = new fOne(fOneObj)
-    fOne.save()
-    let fTwo = new fTwo(fTwoObj)
-    fTwo.save()
-    let fThree = new fThree(fThreeObj)
-    fThree.save()
+    let fne = new fOne(fOneObj)
+    fne.save()
+    let fwo = new fTwo(fTwoObj)
+    fwo.save()
+    let fhree = new fThree(fThreeObj)
+    fhree.save()
     res.send(data)
 
 })

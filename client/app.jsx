@@ -22,14 +22,24 @@ class App extends React.Component {
 
         }
     }
-     ClearFields() {
+    ClearFields() {
         document.getElementById("one").value = "";
         document.getElementById("two").value = "";
         document.getElementById("three").value = "";
         document.getElementById("four").value = "";
         document.getElementById("five").value = "";
-   }
+    }
 
+    saveToDataBase() {
+        $.ajax({
+            url: "http://localhost:3000/",
+            type: 'POST',
+            data: this.state,
+            contentType: 'application/json',
+            success: successCB,
+
+        });
+    }
     render() {
         return (
             <div>
@@ -40,39 +50,50 @@ class App extends React.Component {
                         (this.state.formCounter === 1) ?
                             <form>
                                 <p>FORM ONE</p>
-                                <div><input type="text" placeholder="UserName" onChange={(e) => this.setState({ Name: e.target.value})} /></div>
-                                <div><input type="text" placeholder="Email" onChange={(e) => this.setState({ Email:  e.target.value })} /></div>
-                                <div><input type="password" placeholder="Password" onChange={(e) => this.setState({ Password:  e.target.value })} /> </div>
+                                <div><input type="text" placeholder="UserName" onChange={(e) => this.setState({ Name: e.target.value })} /></div>
+                                <div><input type="text" placeholder="Email" onChange={(e) => this.setState({ Email: e.target.value })} /></div>
+                                <div><input type="password" placeholder="Password" onChange={(e) => this.setState({ Password: e.target.value })} /> </div>
                                 <button onClick={() => this.setState({ formCounter: 2 })} type="reset" value="Reset">go to form two</button>
                             </form>
                             :
                             (this.state.formCounter === 2) ?
                                 <div>
                                     <p>FORM TWO</p>
-                                    <div><input type="text"  id="one" placeholder="Line one" onChange={(e) => this.setState({ LineOne:  e.target.value })}/></div>
-                                    <div><input type="text" id="two" placeholder="Line two"onChange={(e) => this.setState({ LineTwo:  e.target.value })} /></div>
-                                    <div><input type="text" id="three" placeholder="City"onChange={(e) => this.setState({ City:  e.target.value })} /> </div>
-                                    <div><input type="text" id="four" placeholder="State" onChange={(e) => this.setState({ State:  e.target.value })}/> </div>
-                                    <div><input type="text" id="five" placeholder="Zip Code" onChange={(e) => this.setState({ Zipcode:  e.target.value })}/> </div>
-                                    <button onClick={() =>{ 
+                                    <div><input type="text" id="one" placeholder="Line one" onChange={(e) => this.setState({ LineOne: e.target.value })} /></div>
+                                    <div><input type="text" id="two" placeholder="Line two" onChange={(e) => this.setState({ LineTwo: e.target.value })} /></div>
+                                    <div><input type="text" id="three" placeholder="City" onChange={(e) => this.setState({ City: e.target.value })} /> </div>
+                                    <div><input type="text" id="four" placeholder="State" onChange={(e) => this.setState({ State: e.target.value })} /> </div>
+                                    <div><input type="text" id="five" placeholder="Zip Code" onChange={(e) => this.setState({ Zipcode: e.target.value })} /> </div>
+                                    <button onClick={() => {
                                         this.setState({ formCounter: 3 })
                                         this.ClearFields()
-                                        }} type="reset" value="Reset">go to form three</button>
+                                    }} type="reset" value="Reset">go to form three</button>
                                 </div>
                                 :
                                 (this.state.formCounter === 3) ?
                                     <div>
                                         <p>FORM TWO</p>
-                                        <div><input type="text" placeholder="Card Number"onChange={(e) => this.setState({ CreditCardNumber:  e.target.value })} /></div>
-                                        <div><input type="text" placeholder="Expire Date"onChange={(e) => this.setState({ ExpirationDate:  e.target.value })} /></div>
-                                        <div><input type="text" placeholder="CVV" onChange={(e) => this.setState({ CVV:  e.target.value })}/> </div>
-                                        <div><input type="text" placeholder=" billing zip code" onChange={(e) => this.setState({ BillingZipcode:  e.target.value })}/> </div>
-                                        <button onClick={() => this.setState({ formCounter: 4 })} type="reset" value="Reset">preview info</button>
+                                        <div><input type="text" placeholder="Card Number" onChange={(e) => this.setState({ CreditCardNumber: e.target.value })} /></div>
+                                        <div><input type="text" placeholder="Expire Date" onChange={(e) => this.setState({ ExpirationDate: e.target.value })} /></div>
+                                        <div><input type="text" placeholder="CVV" onChange={(e) => this.setState({ CVV: e.target.value })} /> </div>
+                                        <div><input type="text" placeholder=" billing zip code" onChange={(e) => this.setState({ BillingZipcode: e.target.value })} /> </div>
+                                        <button onClick={() => {
+                                            this.setState({ formCounter: 4 })
+                                            fetch("http://localhost:3000/", {
+                                                method: "POST",
+                                                body: this.state,
+                                                headers: {
+                                                    "Content-type": "application/json; charset=UTF-8"
+                                                }
+                                            })
+                                                .then(response => response.json())
+                                                .then(json => console.log(json))
+                                        }} type="reset" value="Reset">preview info</button>
                                     </div>
                                     :
                                     <div>
-                                    <p>you information</p>
-                                    <button onClick={() => console.log(this.state)}>GO TO CHECK OUT</button>
+                                        <p>you information</p>
+                                        <button onClick={() => this.setState({ formCounter: 0 })}>GO TO CHECK OUT</button>
                                     </div>
                 }
             </div>
