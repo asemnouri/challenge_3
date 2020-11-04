@@ -7,66 +7,73 @@ class App extends React.Component {
         super()
         this.state = {
             formCounter: 0,
-            firstPage: {
-                Name: '',
-                Email: '',
-                Password: ''
-              },
-              secondPage:{
-                LineOne: '',
-                LineTwo: '',
-                City: '',
-                State: '', 
-                Zipcode: ''
-              },
-              thirdPage:{
-                CreditCardNumber: '',
-                ExpirationDate: '', 
-                CVV: '', 
-                BillingZipcode: ''
-              }
+            Name: '',
+            Email: '',
+            Password: '',
+            LineOne: '',
+            LineTwo: '',
+            City: '',
+            State: '',
+            Zipcode: '',
+            CreditCardNumber: '',
+            ExpirationDate: '',
+            CVV: '',
+            BillingZipcode: ''
+
         }
     }
+     ClearFields() {
+        document.getElementById("one").value = "";
+        document.getElementById("two").value = "";
+        document.getElementById("three").value = "";
+        document.getElementById("four").value = "";
+        document.getElementById("five").value = "";
+   }
+
     render() {
         return (
             <div>
                 {
                     (this.state.formCounter === 0) ?
                         <button onClick={() => this.setState({ formCounter: 1 })}>GO TO CHECK OUT</button>
-
                         :
                         (this.state.formCounter === 1) ?
-                            <div>
-                                <p>First Page</p>
-                                <div><input type="text" placeholder="UserName" /></div>
-                                <div><input type="text" placeholder="Email" /></div>
-                                <div><input type="password" placeholder="Password" /> </div>
-                                <button onClick={() => this.setState({ formCounter: 2 })}>GO TO third page</button>
-                            </div>
+                            <form>
+                                <p>FORM ONE</p>
+                                <div><input type="text" placeholder="UserName" onChange={(e) => this.setState({ Name: e.target.value})} /></div>
+                                <div><input type="text" placeholder="Email" onChange={(e) => this.setState({ Email:  e.target.value })} /></div>
+                                <div><input type="password" placeholder="Password" onChange={(e) => this.setState({ Password:  e.target.value })} /> </div>
+                                <button onClick={() => this.setState({ formCounter: 2 })} type="reset" value="Reset">go to form two</button>
+                            </form>
                             :
                             (this.state.formCounter === 2) ?
                                 <div>
-                                    <p>Third Page</p>
-                                    <div><input type="text" placeholder="Line one" /></div>
-                                    <div><input type="text" placeholder="Line two" /></div>
-                                    <div><input type="text" placeholder="City" /> </div>
-                                    <div><input type="text" placeholder="State" /> </div>
-                                    <div><input type="text" placeholder="Zip Code" /> </div>
-                                    <button onClick={() => this.setState({ formCounter: 3 })}>NEXT</button>
+                                    <p>FORM TWO</p>
+                                    <div><input type="text"  id="one" placeholder="Line one" onChange={(e) => this.setState({ LineOne:  e.target.value })}/></div>
+                                    <div><input type="text" id="two" placeholder="Line two"onChange={(e) => this.setState({ LineTwo:  e.target.value })} /></div>
+                                    <div><input type="text" id="three" placeholder="City"onChange={(e) => this.setState({ City:  e.target.value })} /> </div>
+                                    <div><input type="text" id="four" placeholder="State" onChange={(e) => this.setState({ State:  e.target.value })}/> </div>
+                                    <div><input type="text" id="five" placeholder="Zip Code" onChange={(e) => this.setState({ Zipcode:  e.target.value })}/> </div>
+                                    <button onClick={() =>{ 
+                                        this.setState({ formCounter: 3 })
+                                        this.ClearFields()
+                                        }} type="reset" value="Reset">go to form three</button>
                                 </div>
                                 :
                                 (this.state.formCounter === 3) ?
-
                                     <div>
-                                        <p>Second Page</p>
-                                        <div><input type="text" placeholder="Card Number" /></div>
-                                        <div><input type="text" placeholder="Expire Date" /></div>
-                                        <div><input type="text" placeholder="CVV" /> </div>
-                                        <div><input type="text" placeholder=" billing zip code" /> </div>
-                                        <button onClick={() => this.setState({ formCounter: 4 })}>NEXT</button>
+                                        <p>FORM TWO</p>
+                                        <div><input type="text" placeholder="Card Number"onChange={(e) => this.setState({ CreditCardNumber:  e.target.value })} /></div>
+                                        <div><input type="text" placeholder="Expire Date"onChange={(e) => this.setState({ ExpirationDate:  e.target.value })} /></div>
+                                        <div><input type="text" placeholder="CVV" onChange={(e) => this.setState({ CVV:  e.target.value })}/> </div>
+                                        <div><input type="text" placeholder=" billing zip code" onChange={(e) => this.setState({ BillingZipcode:  e.target.value })}/> </div>
+                                        <button onClick={() => this.setState({ formCounter: 4 })} type="reset" value="Reset">preview info</button>
                                     </div>
                                     :
-                                    <button onClick={() => this.setState({ formCounter: 1 })}>GO TO CHECK OUT</button>
+                                    <div>
+                                    <p>you information</p>
+                                    <button onClick={() => console.log(this.state)}>GO TO CHECK OUT</button>
+                                    </div>
                 }
             </div>
         )

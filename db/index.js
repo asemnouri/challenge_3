@@ -11,8 +11,7 @@ let fTwoSchema = mongoose.Schema({
   lineTwo: String,
   city: String,
   state: String,
-  zipCode: Number,
-  phoneNumber: Number
+  zipCode: Number
 }, { timestamps: true });
 
 let fThreeSchema = mongoose.Schema({
