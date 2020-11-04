@@ -1,3 +1,6 @@
+// import HomePage from "./components/homePage.js"
+// import {Route, Redirect } from 'react-router-dom';
+
 class App extends React.Component {
     constructor() {
         super()
@@ -5,7 +8,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                hello
+             <button type="button" className="btn btn-primary">GO TO CHECK OUT</button>
+            
             </div>
         )
     }
