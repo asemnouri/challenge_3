@@ -23,6 +23,11 @@ let port = 3000;
 app.get("/app", (req, res) => {
     res.sendFile(__dirname + '/./compiled/client/app.js')
 })
+
+
+// app.get("/checkout", (req, res) => {
+//     res.sendFile(__dirname + '/./compiled/client/components/homePage.js')
+// })
 app.listen(port, () => {
     console.log(`listening `);
 });
